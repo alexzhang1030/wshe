@@ -40,6 +40,12 @@ export function createWSHE<
         return
       send(ws, resolvedConfig, event as string, data)
     },
+    /**
+     * You can use this method to subscribe to events.
+     * @param event The event name.
+     * @param callback The callback function.
+     * @param once default is `false`, If true, the callback will be removed after the first call.
+     */
     subscribe(event: Event, callback: (data?: EventsType[Event]) => void, once = false) {
       const cleanup = () => {
         emitter.off(event as string, fn)
