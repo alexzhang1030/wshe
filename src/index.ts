@@ -40,8 +40,11 @@ export function createWSHE<
         return
       send(ws, resolvedConfig, event as string, data)
     },
-    subscribe(event: Event, callback: (data?: EventsType[Event]) => void) {
-      return emitter.on(event as string, (data: WSHEMessage<EventsType[Event]>) => {
+    subscribe(event: Event, callback: (data?: EventsType[Event]) => void, once = false) {
+      const cleanup = () => {
+        emitter.off(event as string, fn)
+      }
+      function fn(data: WSHEMessage<EventsType[Event]>) {
         const receivedAt = Date.now()
         const timeDiff = formatMs(receivedAt - data.createAt)
         if (resolvedConfig.debugging) {
@@ -54,7 +57,11 @@ export function createWSHE<
           )
         }
         callback(data.data)
-      })
+        if (once)
+          cleanup()
+      }
+      emitter.on(event as string, fn)
+      return cleanup
     },
   }
 }
