@@ -49,7 +49,7 @@ describe('send', () => {
     })
     await vi.waitFor(() => {
       if (wshe.ws?.readyState !== window.WebSocket.OPEN)
-        throw new Error('a')
+        throw new Error('WebSocket not open')
     })
 
     wshe.send('eventName', { text: 'Hello, world!' })

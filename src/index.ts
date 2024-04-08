@@ -25,9 +25,9 @@ export function createWSHE<
       return ws
     },
     open() {
-      ws = open(url)
       if (ws)
         return
+      ws = open(url)
       listen(ws, resolvedConfig, emitter)
     },
     close() {
@@ -45,6 +45,7 @@ export function createWSHE<
      * @param event The event name.
      * @param callback The callback function.
      * @param once default is `false`, If true, the callback will be removed after the first call.
+     * @returns cleanup fn
      */
     subscribe(event: Event, callback: (data?: EventsType[Event]) => void, once = false) {
       const cleanup = () => {
@@ -77,5 +78,3 @@ export type {
   WSHEMessage,
   WSHEHeartbeatConfig,
 } from './types'
-
-export { heartbeatResponse } from './heartbeat'

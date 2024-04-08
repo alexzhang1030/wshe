@@ -27,7 +27,7 @@ describe('subscribe', () => {
     await vi.waitFor(() => {
       vi.setSystemTime(date)
       if (wshe.ws?.readyState !== window.WebSocket.OPEN)
-        throw new Error('a')
+        throw new Error('WebSocket not open')
     })
 
     wshe.subscribe(eventName, ev => (event = ev))
@@ -51,16 +51,54 @@ describe('subscribe', () => {
     })
     await vi.waitFor(() => {
       if (wshe.ws?.readyState !== window.WebSocket.OPEN)
-        throw new Error('a')
+        throw new Error('WebSocket not open')
     })
 
     wshe.subscribe('eventName', e => (event = e))
     wshe.ws?.send(JSON.stringify({ event: 'eventName', data: 'Hello world!' }))
     await vi.waitFor(() => {
       if (event === undefined)
-        throw new Error('a')
+        throw new Error('No message received back')
     })
 
     expect(logSpy).toHaveBeenCalled()
+  })
+  it('should unstub the method', async () => {
+    const wshe = createWSHE(`ws://localhost:${mockWSServer.port}`, {
+      immediate: true,
+      debugging: true,
+    })
+
+    const sub = vi.fn()
+    const eventName = 'eventName'
+    const message = 'Hello world!'
+    let event: any
+
+    await vi.waitFor(() => {
+      if (wshe.ws?.readyState !== window.WebSocket.OPEN)
+        throw new Error('WebSocket not open')
+    })
+
+    const cleanup = wshe.subscribe(eventName, sub)
+    wshe.subscribe(eventName, e => event = e)
+
+    wshe.send(eventName, message)
+    await vi.waitFor(() => {
+      if (event === undefined)
+        throw new Error('No message received back')
+    })
+    expect(event).toBe(message)
+    expect(sub).toHaveBeenCalledTimes(1)
+
+    // after cleanup
+    cleanup()
+    event = undefined
+    wshe.send(eventName, message)
+    await vi.waitFor(() => {
+      if (event === undefined)
+        throw new Error('No message received back')
+    })
+    expect(event).toBe(message)
+    expect(sub).toHaveBeenCalledTimes(1)
   })
 })
