@@ -5,6 +5,7 @@
 <a href="https://www.npmjs.com/package/wshe" target="_blank" rel="noopener noreferrer"><img src="https://badgen.net/npm/v/wshe" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/package/wshe" target="_blank" rel="noopener noreferrer"><img src="https://badgen.net/npm/dt/wshe" alt="NPM Downloads" /></a>
 <a href="https://github.com/alexzhang1030/wshe/blob/main/LICENSE" target="_blank" rel="noopener noreferrer"><img src="https://badgen.net/github/license/alexzhang1030/wshe" alt="License" /></a>
+<a href="https://codecov.io/gh/alexzhang1030/wshe" ><img src="https://codecov.io/gh/alexzhang1030/wshe/graph/badge.svg?token=I4FQDYAOMN"/></a>
 
 A simple yet modern websocket client.
 
