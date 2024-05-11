@@ -96,4 +96,6 @@ export type {
   WSHEConfig,
   WSHEMessage,
   WSHEHeartbeatConfig,
+  BinaryDataTypes,
+  TypedArray,
 } from './types'
