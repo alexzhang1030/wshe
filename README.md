@@ -32,6 +32,8 @@ wshe.connect()
 wshe.send('<eventName>', '<eventPayload>')
 
 // or send raw data
+wshe.sendRaw('<rawData>')
+wshe.subscribeRaw((data) => {})
 
 // You can listen to messages
 const unsubscribe = wshe.subscribe('<eventName>', (payload) => {})
