@@ -14,8 +14,8 @@ export function listen(ws: WebSocket, config: ResolvedWSHEConfig, emitter: Emitt
 
     try {
       message = destr<WSHEMessage>(e.data)
+      /* c8 ignore start */
     }
-    /* c8 ignore start */
     catch (e) {
       if (config.debugging)
         logger.error(e)

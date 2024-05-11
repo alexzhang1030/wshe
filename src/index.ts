@@ -9,14 +9,16 @@ import { close } from './close'
 export function createWSHE<
   EventsType extends Record<string, any> = DefaultEmittersType,
   Event extends keyof EventsType = keyof EventsType,
->(url: string, config: WSHEConfig = {}) {
+>(urlOrWsInstance: string | WebSocket, config: WSHEConfig = {}) {
   const resolvedConfig = resolveRawConfig(config)
 
   const emitter = mitt<DefaultEmittersType>()
-  let ws: WebSocket | null = null
+  let ws: WebSocket | null = typeof urlOrWsInstance === 'string' ? null : urlOrWsInstance
+  const url = typeof urlOrWsInstance === 'string' ? urlOrWsInstance : ''
 
   if (resolvedConfig.immediate) {
-    ws = open(url)
+    if (!ws)
+      ws = open(url)
     listen(ws, resolvedConfig, emitter)
   }
 

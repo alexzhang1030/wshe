@@ -58,4 +58,27 @@ describe('send', () => {
     expect(groupSpy).toHaveBeenCalledWith('eventName', { text: 'Hello, world!' })
     expect(groupEndSpy).toHaveBeenCalled()
   })
+
+  it('send but not connected, should nothing happened', async () => {
+    const wshe = createWSHE(`ws://localhost:${mockWSServer.port}`, { immediate: false })
+
+    wshe.send('eventName', { text: 'Hello, world!' })
+    vi.advanceTimersByTime(100)
+
+    expect(wshe.ws).toBeNull()
+  })
+
+  it('should work with a custom WebSocket instance', async () => {
+    const ws = new WebSocket(`ws://localhost:${mockWSServer.port}`)
+    const wshe = createWSHE(ws, { immediate: true })
+    await vi.waitFor(() => {
+      if (wshe.ws?.readyState !== window.WebSocket.OPEN)
+        throw new Error('WebSocket not open')
+    })
+
+    wshe.send('eventName', { text: 'Hello, world!' })
+    vi.advanceTimersByTime(100)
+
+    expect(wshe.ws).toBe(ws)
+  })
 })

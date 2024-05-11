@@ -30,4 +30,9 @@ describe('close', () => {
     expect(wshe.ws).toBeInstanceOf(window.WebSocket)
     expect(wshe.ws?.readyState).toBe(window.WebSocket.CLOSING)
   })
+
+  it('close but not connected, should not throw an error', () => {
+    const wshe = createWSHE(`ws://localhost:${mockWSServer.port}`)
+    wshe.close()
+  })
 })
