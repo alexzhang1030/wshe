@@ -1,8 +1,8 @@
 import { destr } from 'destr'
 import { heartbeatListen, heartbeatStart, heartbeatStop } from './heartbeat'
 import type { Emitters, ResolvedWSHEConfig, WSHEMessage } from './types'
-import { logger } from './utils'
-import { BINARY_EVENT } from './constants'
+import { isWithSign, logger, omitSign } from './utils'
+import { RAW_EVENT } from './constants'
 
 export function listen(ws: WebSocket, config: ResolvedWSHEConfig, emitter: Emitters): void {
   ws.onopen = (ev) => {
@@ -13,13 +13,13 @@ export function listen(ws: WebSocket, config: ResolvedWSHEConfig, emitter: Emitt
   ws.onmessage = (e: MessageEvent<any>): any => {
     let message: WSHEMessage
 
-    if (typeof e.data !== 'string') {
-      emitter.emit(BINARY_EVENT, e.data)
+    if (typeof e.data !== 'string' || !isWithSign(e.data)) {
+      emitter.emit(RAW_EVENT, e.data)
       return
     }
 
     try {
-      message = destr<WSHEMessage>(e.data)
+      message = destr<WSHEMessage>(omitSign(e.data))
       /* c8 ignore start */
     }
     catch (e) {

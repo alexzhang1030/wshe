@@ -65,8 +65,8 @@ describe('send', () => {
     wshe.send('eventName', { text: 'Hello, world!' })
     vi.advanceTimersByTime(100)
 
-    wshe.sendBinaryData(new Uint8Array())
-    wshe.subscribeBinaryData(() => {})
+    wshe.sendRaw(new Uint8Array())
+    wshe.subscribeRaw(() => {})
 
     expect(wshe.ws).toBeNull()
   })
@@ -117,8 +117,8 @@ describe('send', () => {
         throw new Error('a')
     })
 
-    wshe.subscribeBinaryData(ev => (event = ev))
-    wshe.sendBinaryData(eventData)
+    wshe.subscribeRaw(ev => (event = ev))
+    wshe.sendRaw(eventData)
     await vi.waitFor(() => {
       vi.setSystemTime(date)
       if (event === undefined)

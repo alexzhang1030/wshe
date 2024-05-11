@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createWSHE } from '..'
+import { withSign } from '../utils'
 import { createMockWSServer } from './utils'
 
 describe('heartbeat', () => {
@@ -51,7 +52,7 @@ describe('heartbeat', () => {
     expect(pingSpy).toHaveBeenCalledTimes(1)
 
     message = undefined
-    mockWSServer.ws?.send(JSON.stringify({ event: 'pong' }))
+    mockWSServer.ws?.send(withSign(JSON.stringify({ event: 'pong' })))
     await vi.waitFor(() => {
       if (message === undefined)
         throw new Error('No message received')

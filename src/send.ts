@@ -1,5 +1,5 @@
 import type { ResolvedWSHEConfig, WSHEMessage } from './types'
-import { logger } from './utils'
+import { logger, withSign } from './utils'
 
 export function send<T>(ws: WebSocket, config: ResolvedWSHEConfig, eventName: string, data?: T) {
   if (config.debugging) {
@@ -12,9 +12,9 @@ export function send<T>(ws: WebSocket, config: ResolvedWSHEConfig, eventName: st
     }, timeout)
   }
 
-  ws.send(JSON.stringify({
+  ws.send(withSign(JSON.stringify({
     event: eventName,
     data,
     createAt: Date.now(),
-  } satisfies WSHEMessage))
+  } satisfies WSHEMessage)))
 }

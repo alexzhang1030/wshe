@@ -1,3 +1,4 @@
+import { SIGN } from './constants'
 import type { ResolvedWSHEConfig, ResolvedWSHEHeartbeatConfig, WSHEConfig } from './types'
 
 export function noop() {}
@@ -55,4 +56,16 @@ export function formatMs(ms: number): { value: number, unit: 'ms' | 's' | 'm' | 
     return { value: ms / 60000, unit: 'm' }
 
   return { value: ms / 3600000, unit: 'h' }
+}
+
+export function withSign(data: string): string {
+  return `${SIGN}${data}`
+}
+
+export function isWithSign(data: string): boolean {
+  return data.startsWith(SIGN)
+}
+
+export function omitSign(data: string): string {
+  return data.slice(SIGN.length)
 }

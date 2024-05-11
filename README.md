@@ -31,6 +31,8 @@ wshe.connect()
 // You can send something
 wshe.send('<eventName>', '<eventPayload>')
 
+// or send raw data
+
 // You can listen to messages
 const unsubscribe = wshe.subscribe('<eventName>', (payload) => {})
 ```
@@ -38,10 +40,11 @@ const unsubscribe = wshe.subscribe('<eventName>', (payload) => {})
 Noticed that wshe will send `ping` message every 5 seconds for keep the connection alive. You need response `pong`.
 
 ```ts
-ws.send(JSON.stringify({
+// _$WSHE is required for auto JSON.parse
+ws.send(`_$WHSE${JSON.stringify({
   event: 'pong',
   createAt: Date.now(),
-} satisfies WSHEMessage<T>))
+})}`)
 ```
 
 ## TypeScript Support

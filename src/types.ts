@@ -86,4 +86,6 @@ export type TypedArray =
 /**
  * @ https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send#data
  */
+export type DataTypes = string | BinaryDataTypes
+
 export type BinaryDataTypes = Blob | ArrayBuffer | DataView | TypedArray
