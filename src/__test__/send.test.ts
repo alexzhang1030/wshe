@@ -81,4 +81,24 @@ describe('send', () => {
 
     expect(wshe.ws).toBe(ws)
   })
+  it('should emit events when custom ws instance is opened / closed', async () => {
+    const ws = new WebSocket(`ws://localhost:${mockWSServer.port}`)
+    const onConnected = vi.fn()
+    const onDisconnected = vi.fn()
+    const wshe = createWSHE(ws, { immediate: true, onConnected, onDisconnected })
+
+    await vi.waitFor(() => {
+      if (wshe.ws?.readyState !== window.WebSocket.OPEN)
+        throw new Error('WebSocket not open')
+    })
+
+    ws.close()
+    await vi.waitFor(() => {
+      if (wshe.ws?.readyState !== window.WebSocket.CLOSED)
+        throw new Error('WebSocket not closed')
+    })
+
+    expect(onConnected).toHaveBeenCalled()
+    expect(onDisconnected).toHaveBeenCalled()
+  })
 })
