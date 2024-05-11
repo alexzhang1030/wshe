@@ -65,6 +65,9 @@ describe('send', () => {
     wshe.send('eventName', { text: 'Hello, world!' })
     vi.advanceTimersByTime(100)
 
+    wshe.sendBinaryData(new Uint8Array())
+    wshe.subscribeBinaryData(() => {})
+
     expect(wshe.ws).toBeNull()
   })
 
@@ -100,5 +103,29 @@ describe('send', () => {
 
     expect(onConnected).toHaveBeenCalled()
     expect(onDisconnected).toHaveBeenCalled()
+  })
+
+  it('should support binary data', async () => {
+    const eventData = new Uint8Array([1, 2, 3, 4, 5])
+
+    let event: any
+
+    const wshe = createWSHE(`ws://localhost:${mockWSServer.port}`, { immediate: true })
+    await vi.waitFor(() => {
+      vi.setSystemTime(date)
+      if (wshe.ws?.readyState !== window.WebSocket.OPEN)
+        throw new Error('a')
+    })
+
+    wshe.subscribeBinaryData(ev => (event = ev))
+    wshe.sendBinaryData(eventData)
+    await vi.waitFor(() => {
+      vi.setSystemTime(date)
+      if (event === undefined)
+        throw new Error('Binary Data not received back')
+    })
+
+    expect(event).instanceof(Blob)
+    expect(event).toStrictEqual(new Blob([eventData]))
   })
 })

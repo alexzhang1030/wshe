@@ -1,10 +1,11 @@
 import mitt from 'mitt'
 import { listen } from './listen'
 import { open } from './open'
-import type { DefaultEmittersType, WSHEConfig, WSHEMessage } from './types'
+import type { BinaryDataTypes, DefaultEmittersType, WSHEConfig, WSHEMessage } from './types'
 import { formatMs, formatString, logger, resolveRawConfig } from './utils'
 import { send } from './send'
 import { close } from './close'
+import { BINARY_EVENT } from './constants'
 
 export function createWSHE<
   EventsType extends Record<string, any> = DefaultEmittersType,
@@ -41,6 +42,22 @@ export function createWSHE<
       if (!ws)
         return
       send(ws, resolvedConfig, event as string, data)
+    },
+    /**
+     * With this function to send binary data, but cannot subscribe to events now.
+     */
+    sendBinaryData(data: BinaryDataTypes) {
+      if (!ws)
+        return
+      ws.send(data)
+    },
+    /**
+     * With this function to subscribe to binary data.
+     */
+    subscribeBinaryData<T extends BinaryDataTypes>(callback: (data: T) => void) {
+      if (!ws)
+        return
+      emitter.on(BINARY_EVENT, callback)
     },
     /**
      * You can use this method to subscribe to events.

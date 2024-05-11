@@ -9,10 +9,14 @@ export function createMockWSServer() {
   server.on('connection', (ws) => {
     wsClient = ws
     ws.on('message', (data) => {
-      const parsedData = JSON.parse(data.toString())
-
-      const message = { ...parsedData, timeSended: Date.now() }
-      ws.send(JSON.stringify(message))
+      try {
+        const parsedData = JSON.parse(data.toString())
+        const message = { ...parsedData, timeSended: Date.now() }
+        ws.send(JSON.stringify(message))
+      }
+      catch {
+        ws.send(data)
+      }
     })
   })
 
