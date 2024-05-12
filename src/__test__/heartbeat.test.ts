@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createWSHE } from '..'
 import { withSign } from '../utils'
 import { createMockWSServer } from './utils'
+import { getHeartbeatResponse, isHeartbeatRequest } from '@/heartbeat'
 
 describe('heartbeat', () => {
   const date = new Date(2000, 1, 1)
@@ -51,14 +52,25 @@ describe('heartbeat', () => {
     expect(message).toBe(message)
     expect(pingSpy).toHaveBeenCalledTimes(1)
 
+    mockWSServer.ws?.send(getHeartbeatResponse())
     message = undefined
-    mockWSServer.ws?.send(withSign(JSON.stringify({ event: 'pong' })))
     await vi.waitFor(() => {
       if (message === undefined)
         throw new Error('No message received')
     }, { timeout: interval + 100 })
 
     expect(pingSpy).toHaveBeenCalledTimes(2)
+  })
+
+  it('test isHeartbeatRequest', () => {
+    const ping = 'ping'
+    const pong = 'pong'
+
+    const pingMessage = withSign(JSON.stringify({ event: ping }))
+    const pongMessage = withSign(JSON.stringify({ event: pong }))
+
+    expect(isHeartbeatRequest(pingMessage, ping)).toBe(true)
+    expect(isHeartbeatRequest(pongMessage, ping)).toBe(false)
   })
 
   it('must close the connection if no response is received from the server', async () => {
@@ -84,7 +96,6 @@ describe('heartbeat', () => {
       },
     )
 
-    // Assert
     expect(wshe.ws?.readyState).toBe(window.WebSocket.CLOSED)
   })
 })

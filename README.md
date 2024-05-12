@@ -39,14 +39,30 @@ wshe.subscribeRaw((data) => {})
 const unsubscribe = wshe.subscribe('<eventName>', (payload) => {})
 ```
 
-Noticed that wshe will send `ping` message every 5 seconds for keep the connection alive. You need response `pong`.
+## Server implementation
+
+You should implement a server that can handle the following message format:
+
+```json
+{
+  "event": "<eventName>",
+  "payload": "<eventPayload>"
+}
+```
+
+And do this on `onmessage` to handle heartbeat requests:
 
 ```ts
-// _$WSHE is required for auto JSON.parse
-ws.send(`_$WHSE${JSON.stringify({
-  event: 'pong',
-  createAt: Date.now(),
-})}`)
+import { getHeartbeatResponse, isHeartbeatRequest } from 'wshe/server'
+
+ws.onmessage = (message) => {
+  if (isHeartbeatRequest(message)) {
+    ws.send(getHeartbeatResponse(message))
+    return
+  }
+  // do your own logic here..., e.g.
+  JSON.parse(message)
+}
 ```
 
 ## TypeScript Support

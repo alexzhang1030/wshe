@@ -7,7 +7,6 @@ export function resolveRawConfig(config: WSHEConfig): ResolvedWSHEConfig {
   const {
     debugging = false,
     immediate = false,
-    retryTimes = 5,
 
     onError = noop,
     onConnected = noop,
@@ -26,7 +25,6 @@ export function resolveRawConfig(config: WSHEConfig): ResolvedWSHEConfig {
   return {
     debugging,
     immediate,
-    retryTimes,
     onError,
     onConnected,
     onDisconnected,

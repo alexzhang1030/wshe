@@ -35,11 +35,6 @@ export interface WSHEConfig {
    * @default
    */
   heartbeat?: WSHEHeartbeatConfig
-  /**
-   * Retry times when disconnected
-   * @default 5
-   */
-  retryTimes?: number
 }
 
 export type ResolvedWSHEConfig = Required<WSHEConfig> & {
