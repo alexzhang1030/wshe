@@ -41,14 +41,7 @@ const unsubscribe = wshe.subscribe('<eventName>', (payload) => {})
 
 ## Server implementation
 
-You should implement a server that can handle the following message format:
-
-```json
-{
-  "event": "<eventName>",
-  "payload": "<eventPayload>"
-}
-```
+You should implement a server to transfer messages between clients.
 
 And do this on `onmessage` to handle heartbeat requests:
 
