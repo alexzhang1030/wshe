@@ -117,7 +117,7 @@ describe('send', () => {
         throw new Error('a')
     })
 
-    wshe.subscribeRaw(ev => (event = ev))
+    const unsubscribe = wshe.subscribeRaw(ev => (event = ev))
     wshe.sendRaw(eventData)
     await vi.waitFor(() => {
       vi.setSystemTime(date)
@@ -127,5 +127,16 @@ describe('send', () => {
 
     expect(event).instanceof(Blob)
     expect(event).toStrictEqual(new Blob([eventData]))
+
+    event = undefined
+    unsubscribe()
+    wshe.sendRaw(eventData)
+    await expect(new Promise<void>((_, reject) => {
+      vi.waitFor(() => {
+        vi.setSystemTime(date)
+        if (event === undefined)
+          reject(new Error('Binary Data received back'))
+      })
+    })).rejects.toThrow()
   })
 })

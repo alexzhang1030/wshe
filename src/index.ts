@@ -56,8 +56,6 @@ export function createWSHE<
      * @returns unsubscribe function
      */
     subscribeRaw<T extends DataTypes>(callback: (data: T) => void) {
-      if (!ws)
-        return
       emitter.on(RAW_EVENT, callback)
       return () => {
         emitter.off(RAW_EVENT, callback)
