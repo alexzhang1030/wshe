@@ -83,15 +83,19 @@ export function jsonParse<T>(data: string): T {
   return destr<T>(data)
 }
 
-export function tryToParseRawMessage<T>(rawData: any, cb: (data: T) => void) {
+/**
+ * @returns [parsedData, isParsed]
+ */
+export function tryToParseRawMessage<T>(rawData: any): [T | null, boolean] {
   const str = typeof rawData === 'string' ? rawData : rawData.toString()
   if (!isWithSign(str))
-    return
+    return [null, false]
   try {
     const res = jsonParse<T>(omitSign(str))
-    cb(res)
+    return [res, true]
   }
   catch {
+    return [null, false]
   }
 }
 /* c8 ignore stop */
