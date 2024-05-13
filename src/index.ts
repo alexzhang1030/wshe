@@ -53,18 +53,22 @@ export function createWSHE<
     },
     /**
      * With this function to subscribe to raw data.
+     * @returns unsubscribe function
      */
     subscribeRaw<T extends DataTypes>(callback: (data: T) => void) {
       if (!ws)
         return
       emitter.on(RAW_EVENT, callback)
+      return () => {
+        emitter.off(RAW_EVENT, callback)
+      }
     },
     /**
      * You can use this method to subscribe to events.
      * @param event The event name.
      * @param callback The callback function.
      * @param once default is `false`, If true, the callback will be removed after the first call.
-     * @returns cleanup fn
+     * @returns unsubscribe function
      */
     subscribe(event: Event, callback: (data?: EventsType[Event]) => void, once = false) {
       const cleanup = () => {
