@@ -92,6 +92,8 @@ export function createWSHE<
   }
 }
 
+export type WSHE = ReturnType<typeof createWSHE>
+
 export type {
   WSHEConfig,
   WSHEMessage,
