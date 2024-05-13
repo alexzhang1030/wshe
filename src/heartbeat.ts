@@ -44,6 +44,10 @@ export function isHeartbeatRequest(rawData: any, pingMessage = 'ping') {
   return false
 }
 
+export function isHeartbeatRequestParsed(data: any, pingMessage = 'ping') {
+  return data.event === pingMessage
+}
+
 export function getHeartbeatResponse(pongMessage = 'pong') {
   return withSign(JSON.stringify({
     event: pongMessage,

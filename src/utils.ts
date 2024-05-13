@@ -79,13 +79,19 @@ export function jsonStringify(data: any): string {
   }
 }
 
-export function jsonParse<T>(data: string, onError?: () => void): T {
+export function jsonParse<T>(data: string): T {
+  return destr<T>(data)
+}
+
+export function tryToParseRawMessage<T>(rawData: any, cb: (data: T) => void) {
+  const str = typeof rawData === 'string' ? rawData : rawData.toString()
+  if (!isWithSign(str))
+    return
   try {
-    return destr<T>(data)
+    const res = jsonParse<T>(omitSign(str))
+    cb(res)
   }
   catch {
-    onError?.()
-    return {} as T
   }
 }
 /* c8 ignore stop */
