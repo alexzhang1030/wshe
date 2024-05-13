@@ -1,3 +1,4 @@
+import destr from 'destr'
 import { SIGN } from './constants'
 import type { ResolvedWSHEConfig, ResolvedWSHEHeartbeatConfig, WSHEConfig } from './types'
 
@@ -67,3 +68,24 @@ export function isWithSign(data: string): boolean {
 export function omitSign(data: string): string {
   return data.slice(SIGN.length)
 }
+
+/* c8 ignore start */
+export function jsonStringify(data: any): string {
+  try {
+    return JSON.stringify(data)
+  }
+  catch (e) {
+    return ''
+  }
+}
+
+export function jsonParse<T>(data: string, onError?: () => void): T {
+  try {
+    return destr<T>(data)
+  }
+  catch {
+    onError?.()
+    return {} as T
+  }
+}
+/* c8 ignore stop */
