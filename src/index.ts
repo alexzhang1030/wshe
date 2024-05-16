@@ -23,19 +23,37 @@ export function createWSHE<
     listen(ws, resolvedConfig, emitter)
   }
 
+  let manualClose = false
+
+  if (config.autoReconnect && ws)
+    bindReconnect(ws)
+
+  function bindReconnect(ws: WebSocket) {
+    ws.addEventListener('close', () => {
+      if (manualClose)
+        return
+      ws = open(url)
+      listen(ws, resolvedConfig, emitter)
+    })
+  }
+
   return {
     get ws() {
       return ws
     },
     open() {
-      if (ws)
+      if (ws && !manualClose)
         return
+      manualClose = false
       ws = open(url)
       listen(ws, resolvedConfig, emitter)
+      if (config.autoReconnect)
+        bindReconnect(ws)
     },
     close() {
       if (!ws)
         return
+      manualClose = true
       close(ws, resolvedConfig)
     },
     send(event: Event, data: EventsType[Event]) {

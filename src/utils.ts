@@ -12,6 +12,7 @@ export function resolveRawConfig(config: WSHEConfig): ResolvedWSHEConfig {
     onError = noop,
     onConnected = noop,
     onDisconnected = noop,
+    autoReconnect = false,
 
     heartbeat,
   } = config
@@ -30,6 +31,7 @@ export function resolveRawConfig(config: WSHEConfig): ResolvedWSHEConfig {
     onConnected,
     onDisconnected,
     heartbeat: resolveHeartbeat,
+    autoReconnect,
   }
 }
 

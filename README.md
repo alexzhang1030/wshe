@@ -58,6 +58,72 @@ ws.onmessage = (message) => {
 }
 ```
 
+## Options
+
+```ts
+interface WSHEConfig {
+  /**
+   * onConnected event callback
+   * @default
+   * () => {}
+   */
+  onConnected?: (ws: WebSocket, event: Event) => void
+  /**
+   * onDisconnected event callback
+   * @default
+   * () => {}
+   */
+  onDisconnected?: (ws: WebSocket, event: CloseEvent) => void
+  /**
+   * onMessage event callback
+   * @default
+   * () => {}
+   */
+  onError?: (ws: WebSocket, event: Event) => void
+
+  /**
+   * Debugging log
+   * @default false
+   */
+  debugging?: boolean
+  /**
+   * Connection ws immediately
+   * @default false
+   */
+  immediate?: boolean
+  /**
+   * Heartbeat configuration
+   * @default
+   */
+  heartbeat?: WSHEHeartbeatConfig
+
+  /**
+   * Auto reconnect
+   * @default false
+   */
+  autoReconnect?: boolean
+}
+
+interface WSHEHeartbeatConfig {
+  /**
+   * @default 5000
+   */
+  interval?: number
+  /**
+   * @default "ping"
+   */
+  pingMessage?: string
+  /**
+   * @default "pong"
+   */
+  pongMessage?: string
+  /**
+   * @default 10000
+   */
+  timeout?: number
+}
+```
+
 ## TypeScript Support
 
 This library is written in TypeScript and provides good support for it.

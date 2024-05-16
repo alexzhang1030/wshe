@@ -35,6 +35,12 @@ export interface WSHEConfig {
    * @default
    */
   heartbeat?: WSHEHeartbeatConfig
+
+  /**
+   * Auto reconnect
+   * @default false
+   */
+  autoReconnect?: boolean
 }
 
 export type ResolvedWSHEConfig = Required<WSHEConfig> & {

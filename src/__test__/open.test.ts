@@ -46,4 +46,74 @@ describe('open', () => {
     wshe.open()
     expect(spy).toHaveBeenCalledTimes(1)
   })
+
+  it('should not auto reconnect when the connection is closed', async () => {
+    const wshe = createWSHE(`ws://localhost:${mockWSServer.port}`, {
+      immediate: true,
+    })
+
+    await vi.waitFor(() => {
+      if (wshe.ws?.readyState !== window.WebSocket.OPEN)
+        throw new Error('WebSocket not open')
+    })
+
+    mockWSServer.ws?.close()
+
+    await vi.waitFor(() => {
+      if (wshe.ws?.readyState !== window.WebSocket.CLOSED)
+        throw new Error('WebSocket not closed')
+    })
+  })
+
+  it('should auto reconnect when the connection is closed', async () => {
+    const wshe = createWSHE(`ws://localhost:${mockWSServer.port}`, {
+      immediate: true,
+      autoReconnect: true,
+    })
+
+    await vi.waitFor(() => {
+      if (wshe.ws?.readyState !== window.WebSocket.OPEN)
+        throw new Error('WebSocket not open')
+    })
+
+    mockWSServer.ws?.close()
+
+    await vi.waitFor(() => {
+      if (wshe.ws?.readyState !== window.WebSocket.OPEN)
+        throw new Error('WebSocket not open')
+    })
+  })
+
+  it('should not reconnect when manual close', async () => {
+    const wshe = createWSHE(`ws://localhost:${mockWSServer.port}`, {
+      immediate: true,
+      autoReconnect: true,
+    })
+
+    await vi.waitFor(() => {
+      if (wshe.ws?.readyState !== window.WebSocket.OPEN)
+        throw new Error('WebSocket not open')
+    })
+
+    wshe.close()
+
+    await vi.waitFor(() => {
+      if (wshe.ws?.readyState !== window.WebSocket.CLOSED)
+        throw new Error('WebSocket not closed')
+    })
+
+    mockWSServer.ws?.close()
+
+    await vi.waitFor(() => {
+      if (wshe.ws?.readyState !== window.WebSocket.CLOSED)
+        throw new Error('WebSocket not closed')
+    })
+
+    wshe.open()
+
+    await vi.waitFor(() => {
+      if (wshe.ws?.readyState !== window.WebSocket.OPEN)
+        throw new Error('WebSocket not open')
+    })
+  })
 })
