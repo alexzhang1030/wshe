@@ -15,6 +15,14 @@ describe('send', () => {
     vi.restoreAllMocks()
   })
 
+  it('don\'t send if the connection is not open', async () => {
+    const wshe = createWSHE(`ws://localhost:${mockWSServer.port}`, { immediate: true })
+    wshe.close()
+    wshe.send('eventName', { text: 'Hello, world!' })
+    vi.advanceTimersByTime(100)
+    expect(wshe.ws?.readyState).not.toBe(window.WebSocket.OPEN)
+  })
+
   it('should send an event to the server', async () => {
     const eventName = 'eventName'
     const eventData = { text: 'Hello World!' }
