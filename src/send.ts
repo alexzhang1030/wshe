@@ -12,6 +12,11 @@ export function send<T>(ws: WebSocket, config: ResolvedWSHEConfig, eventName: st
     }, timeout)
   }
 
+  // if the connection is not open, do not send the message
+  if (ws.readyState !== WebSocket.OPEN) {
+    return
+  }
+
   ws.send(withSign(JSON.stringify({
     event: eventName,
     data,
