@@ -2,7 +2,7 @@
   "name": "wshe",
   "type": "module",
   "version": "2.2.1",
-  "packageManager": "pnpm@9.1.2",
+  "packageManager": "pnpm@9.1.4",
   "description": "A simple yet modern websocket client.",
   "author": "alexzhang1030",
   "license": "MIT",
@@ -43,7 +43,7 @@
     "mitt": "^3.0.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.19.0",
+    "@antfu/eslint-config": "^2.20.0",
     "@types/ws": "^8.5.10",
     "@vitest/coverage-v8": "^1.6.0",
     "bumpp": "^9.4.1",
