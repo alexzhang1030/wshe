@@ -2,7 +2,7 @@
   "name": "wshe",
   "type": "module",
   "version": "2.2.1",
-  "packageManager": "pnpm@9.2.0",
+  "packageManager": "pnpm@9.3.0",
   "description": "A simple yet modern websocket client.",
   "author": "alexzhang1030",
   "license": "MIT",
@@ -43,20 +43,20 @@
     "mitt": "^3.0.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.21.0",
+    "@antfu/eslint-config": "^2.21.1",
     "@types/ws": "^8.5.10",
     "@vitest/coverage-v8": "^1.6.0",
     "bumpp": "^9.4.1",
     "eslint": "npm:eslint-ts-patch@8.56.0-0",
     "eslint-ts-patch": "8.56.0-0",
     "jsdom": "^24.1.0",
-    "lint-staged": "^15.2.5",
+    "lint-staged": "^15.2.7",
     "simple-git-hooks": "^2.11.1",
     "tsup": "^8.1.0",
     "typescript": "^5.4.5",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^1.6.0",
-    "ws": "^8.17.0"
+    "ws": "^8.17.1"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
