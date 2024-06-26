@@ -1,7 +1,7 @@
 {
   "name": "wshe",
   "type": "module",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "packageManager": "pnpm@9.3.0",
   "description": "A simple yet modern websocket client.",
   "author": "alexzhang1030",
