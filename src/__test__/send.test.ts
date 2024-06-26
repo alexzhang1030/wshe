@@ -133,8 +133,10 @@ describe('send', () => {
         throw new Error('Binary Data not received back')
     })
 
-    expect(event).instanceof(Blob)
-    expect(event).toStrictEqual(new Blob([eventData]))
+    expect(event).instanceof(ArrayBuffer)
+    expect(event).toStrictEqual(
+      eventData.buffer,
+    )
 
     event = undefined
     unsubscribe()
