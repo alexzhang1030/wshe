@@ -76,7 +76,7 @@ export function jsonStringify(data: any): string {
   try {
     return JSON.stringify(data)
   }
-  catch (e) {
+  catch {
     return ''
   }
 }
