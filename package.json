@@ -43,19 +43,19 @@
     "mitt": "^3.0.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.23.1",
+    "@antfu/eslint-config": "^2.24.0",
     "@types/ws": "^8.5.11",
-    "@vitest/coverage-v8": "^2.0.3",
+    "@vitest/coverage-v8": "^2.0.4",
     "bumpp": "^9.4.1",
     "eslint": "npm:eslint-ts-patch@8.56.0-0",
     "eslint-ts-patch": "8.56.0-0",
     "jsdom": "^24.1.1",
     "lint-staged": "^15.2.7",
     "simple-git-hooks": "^2.11.1",
-    "tsup": "^8.2.1",
-    "typescript": "^5.5.3",
+    "tsup": "^8.2.3",
+    "typescript": "^5.5.4",
     "vite-tsconfig-paths": "^4.3.2",
-    "vitest": "^2.0.3",
+    "vitest": "^2.0.4",
     "ws": "^8.18.0"
   },
   "simple-git-hooks": {
