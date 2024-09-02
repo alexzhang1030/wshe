@@ -32,7 +32,7 @@
   ],
   "scripts": {
     "test": "vitest",
-    "lint": "eslint .",
+    "lint": "NODE_OPTIONS=--import=tsx eslint --config=eslint.config.ts .",
     "prepare": "simple-git-hooks",
     "build": "tsup",
     "prepublishOnly": "pnpm run build",
@@ -47,12 +47,12 @@
     "@types/ws": "^8.5.12",
     "@vitest/coverage-v8": "^2.0.5",
     "bumpp": "^9.5.2",
-    "eslint": "npm:eslint-ts-patch@8.56.0-0",
-    "eslint-ts-patch": "8.56.0-0",
+    "eslint": "^9.9.1",
     "jsdom": "^25.0.0",
     "lint-staged": "^15.2.10",
     "simple-git-hooks": "^2.11.1",
     "tsup": "^8.2.4",
+    "tsx": "^4.19.0",
     "typescript": "^5.5.4",
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.0.5",
@@ -63,7 +63,7 @@
   },
   "lint-staged": {
     "*": [
-      "eslint --fix"
+      "pnpm lint --fix"
     ]
   }
 }
