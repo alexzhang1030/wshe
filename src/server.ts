@@ -1,13 +1,13 @@
 /* c8 ignore start */
+export { SIGN } from './constants'
+export { getHeartbeatResponse, isHeartbeatRequest, isHeartbeatRequestParsed } from './heartbeat'
+
 export {
-  withSign,
   isWithSign,
-  omitSign,
   jsonParse,
   jsonStringify,
+  omitSign,
   tryToParseRawMessage,
+  withSign,
 } from './utils'
-export { SIGN } from './constants'
-
-export { isHeartbeatRequest, getHeartbeatResponse, isHeartbeatRequestParsed } from './heartbeat'
 /* c8 ignore stop */

@@ -1,5 +1,5 @@
-import type { ResolvedWSHEConfig, WSHEMessage } from './types'
 import { logger, withSign } from './utils'
+import type { ResolvedWSHEConfig, WSHEMessage } from './types'
 
 export function send<T>(ws: WebSocket, config: ResolvedWSHEConfig, eventName: string, data?: T) {
   if (config.debugging) {

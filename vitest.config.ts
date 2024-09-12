@@ -1,5 +1,5 @@
-import { defineConfig } from 'vitest/config'
 import alias from 'vite-tsconfig-paths'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [alias()],
