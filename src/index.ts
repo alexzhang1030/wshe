@@ -1,3 +1,4 @@
+import type { DataTypes, DefaultEmittersType, WSHEConfig, WSHEMessage } from './types'
 import mitt from 'mitt'
 import { close } from './close'
 import { RAW_EVENT } from './constants'
@@ -5,7 +6,6 @@ import { listen } from './listen'
 import { open } from './open'
 import { send } from './send'
 import { formatMs, formatString, logger, resolveRawConfig } from './utils'
-import type { DataTypes, DefaultEmittersType, WSHEConfig, WSHEMessage } from './types'
 
 export function createWSHE<
   EventsType extends Record<string, any> = DefaultEmittersType,

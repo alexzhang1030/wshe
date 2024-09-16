@@ -1,6 +1,6 @@
+import type { ResolvedWSHEConfig, ResolvedWSHEHeartbeatConfig, WSHEConfig } from './types'
 import destr from 'destr'
 import { SIGN } from './constants'
-import type { ResolvedWSHEConfig, ResolvedWSHEHeartbeatConfig, WSHEConfig } from './types'
 
 export function noop() {}
 
