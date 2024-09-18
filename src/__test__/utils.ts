@@ -1,5 +1,5 @@
-import { WebSocketServer } from 'ws'
 import type { AddressInfo, WebSocket } from 'ws'
+import { WebSocketServer } from 'ws'
 import { isWithSign, omitSign, withSign } from '../utils'
 
 export function createMockWSServer() {

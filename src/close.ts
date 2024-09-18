@@ -1,5 +1,5 @@
-import { heartbeatStop } from './heartbeat'
 import type { WSHEConfig } from './types'
+import { heartbeatStop } from './heartbeat'
 
 export function close(
   ws: WebSocket,

@@ -1,8 +1,8 @@
+import type { Emitters, ResolvedWSHEConfig, WSHEMessage } from './types'
 import { destr } from 'destr'
 import { RAW_EVENT } from './constants'
 import { heartbeatListen, heartbeatStart, heartbeatStop } from './heartbeat'
 import { isWithSign, logger, omitSign } from './utils'
-import type { Emitters, ResolvedWSHEConfig, WSHEMessage } from './types'
 
 export function listen(ws: WebSocket, config: ResolvedWSHEConfig, emitter: Emitters): void {
   ws.onopen = (ev) => {
