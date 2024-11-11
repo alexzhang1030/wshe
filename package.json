@@ -46,7 +46,7 @@
     "@antfu/eslint-config": "^3.8.0",
     "@types/ws": "^8.5.13",
     "@vitest/coverage-v8": "^2.1.4",
-    "bumpp": "^9.8.0",
+    "bumpp": "^9.8.1",
     "eslint": "^9.14.0",
     "jsdom": "^25.0.1",
     "lint-staged": "^15.2.10",
@@ -54,7 +54,7 @@
     "tsup": "^8.3.5",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
-    "vite-tsconfig-paths": "^5.0.1",
+    "vite-tsconfig-paths": "^5.1.2",
     "vitest": "^2.1.4",
     "ws": "^8.18.0"
   },
