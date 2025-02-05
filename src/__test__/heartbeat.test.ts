@@ -1,8 +1,8 @@
-import { getHeartbeatResponse, isHeartbeatRequest } from '@/heartbeat'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createWSHE } from '..'
 import { withSign } from '../utils'
 import { createMockWSServer } from './utils'
+import { getHeartbeatResponse, isHeartbeatRequest } from '@/heartbeat'
 
 describe('heartbeat', () => {
   const date = new Date(2000, 1, 1)

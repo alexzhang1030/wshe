@@ -1,5 +1,5 @@
-import type { DataTypes, DefaultEmittersType, WSHEConfig, WSHEMessage } from './types'
 import mitt from 'mitt'
+import type { DataTypes, DefaultEmittersType, WSHEConfig, WSHEMessage } from './types'
 import { close } from './close'
 import { RAW_EVENT } from './constants'
 import { listen } from './listen'
