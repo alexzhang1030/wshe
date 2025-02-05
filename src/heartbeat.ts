@@ -1,5 +1,5 @@
-import destr from 'destr'
 import type { ResolvedWSHEConfig, WSHEMessage } from './types'
+import destr from 'destr'
 import { close } from './close'
 import { send } from './send'
 import { isWithSign, omitSign, withSign } from './utils'

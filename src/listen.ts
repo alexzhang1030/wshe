@@ -1,5 +1,5 @@
-import { destr } from 'destr'
 import type { Emitters, ResolvedWSHEConfig, WSHEMessage } from './types'
+import { destr } from 'destr'
 import { RAW_EVENT } from './constants'
 import { heartbeatListen, heartbeatStart, heartbeatStop } from './heartbeat'
 import { isWithSign, logger, omitSign } from './utils'
