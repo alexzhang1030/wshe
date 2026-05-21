@@ -2,7 +2,7 @@
   "name": "wshe",
   "type": "module",
   "version": "2.2.2",
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@11.2.2",
   "description": "A simple yet modern websocket client.",
   "author": "alexzhang1030",
   "license": "MIT",
