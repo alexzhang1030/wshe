@@ -53,7 +53,7 @@
     "simple-git-hooks": "^2.13.0",
     "tsup": "^8.4.0",
     "tsx": "^4.19.4",
-    "typescript": "^5.8.3",
+    "typescript": "^6.0.3",
     "vite-tsconfig-paths": "^6.0.1",
     "vitest": "^4.0.4",
     "ws": "^8.18.2"
