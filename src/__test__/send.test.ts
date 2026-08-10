@@ -133,10 +133,9 @@ describe('send', () => {
         throw new Error('Binary Data not received back')
     })
 
-    expect(event).instanceof(ArrayBuffer)
-    expect(event).toStrictEqual(
-      eventData.buffer,
-    )
+    // Cross-realm ArrayBuffer (jsdom vs node) breaks `instanceof ArrayBuffer`
+    expect(Object.prototype.toString.call(event)).toBe('[object ArrayBuffer]')
+    expect(Array.from(new Uint8Array(event as ArrayBuffer))).toEqual(Array.from(eventData))
 
     event = undefined
     unsubscribe()

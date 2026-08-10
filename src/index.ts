@@ -28,12 +28,14 @@ export function createWSHE<
   if (config.autoReconnect && ws)
     bindReconnect(ws)
 
-  function bindReconnect(ws: WebSocket) {
-    ws.addEventListener('close', () => {
+  function bindReconnect(target: WebSocket) {
+    target.addEventListener('close', () => {
       if (manualClose)
         return
-      ws = open(url)
-      listen(ws, resolvedConfig, emitter)
+      const next = open(url)
+      ws = next
+      listen(next, resolvedConfig, emitter)
+      bindReconnect(next)
     })
   }
 

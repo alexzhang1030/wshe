@@ -12,14 +12,24 @@ export function listen(ws: WebSocket, config: ResolvedWSHEConfig, emitter: Emitt
 
   ws.onmessage = (e: MessageEvent<any>): any => {
     let message: WSHEMessage
+    let data: any = e.data
+    // Normalize Node `ws` Buffer / TypedArray to ArrayBuffer for browser-parity
+    if (typeof data !== 'string') {
+      if (typeof Buffer !== 'undefined' && Buffer.isBuffer(data)) {
+        data = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength)
+      }
+      else if (ArrayBuffer.isView(data)) {
+        data = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength)
+      }
+    }
 
-    if (typeof e.data !== 'string' || !isWithSign(e.data)) {
-      emitter.emit(RAW_EVENT, e.data)
+    if (typeof data !== 'string' || !isWithSign(data)) {
+      emitter.emit(RAW_EVENT, data)
       return
     }
 
     try {
-      message = destr<WSHEMessage>(omitSign(e.data))
+      message = destr<WSHEMessage>(omitSign(data))
       /* c8 ignore start */
     }
     catch (e) {
