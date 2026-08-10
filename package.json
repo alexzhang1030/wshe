@@ -2,7 +2,7 @@
   "name": "wshe",
   "type": "module",
   "version": "2.2.2",
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.34.5",
   "description": "A simple yet modern websocket client.",
   "author": "alexzhang1030",
   "license": "MIT",
@@ -43,20 +43,20 @@
     "mitt": "^3.0.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.13.1",
+    "@antfu/eslint-config": "^4.19.0",
     "@types/ws": "^8.18.1",
-    "@vitest/coverage-v8": "^4.0.4",
-    "bumpp": "^12.0.0",
-    "eslint": "^9.27.0",
+    "@vitest/coverage-v8": "^4.1.10",
+    "bumpp": "^12.2.0",
+    "eslint": "^9.39.5",
     "jsdom": "^30.0.1",
-    "lint-staged": "^17.0.4",
-    "simple-git-hooks": "^2.13.0",
-    "tsup": "^8.5.0",
-    "tsx": "^4.19.4",
-    "typescript": "^5.8.3",
-    "vite-tsconfig-paths": "^6.0.1",
-    "vitest": "^4.0.4",
-    "ws": "^8.18.2"
+    "lint-staged": "^17.3.0",
+    "simple-git-hooks": "^2.13.1",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.11",
+    "typescript": "^5.9.3",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.10",
+    "ws": "^8.21.3"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
