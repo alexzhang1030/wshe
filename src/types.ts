@@ -78,11 +78,11 @@ export type DefaultEmittersType = Record<string, any>
 
 export type Emitters = Emitter<DefaultEmittersType>
 
-export type TypedArray =
-  | Int8Array | Uint8Array
-  | Int16Array | Uint16Array
-  | Int32Array | Uint32Array | Float32Array | Float64Array
-  | BigInt64Array | BigUint64Array
+export type TypedArray
+  = | Int8Array | Uint8Array
+    | Int16Array | Uint16Array
+    | Int32Array | Uint32Array | Float32Array | Float64Array
+    | BigInt64Array | BigUint64Array
 
 /**
  * @ https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send#data
