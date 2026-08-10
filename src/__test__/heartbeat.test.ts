@@ -1,5 +1,5 @@
-import { getHeartbeatResponse, isHeartbeatRequest } from '@/heartbeat'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { getHeartbeatResponse, isHeartbeatRequest } from '@/heartbeat'
 import { createWSHE } from '..'
 import { withSign } from '../utils'
 import { createMockWSServer } from './utils'
