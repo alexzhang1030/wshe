@@ -13,14 +13,11 @@ export function listen(ws: WebSocket, config: ResolvedWSHEConfig, emitter: Emitt
   ws.onmessage = (e: MessageEvent<any>): any => {
     let message: WSHEMessage
     let data: any = e.data
-    // Normalize Node `ws` Buffer / TypedArray to ArrayBuffer for browser-parity
-    if (typeof data !== 'string') {
-      if (typeof Buffer !== 'undefined' && Buffer.isBuffer(data)) {
-        data = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength)
-      }
-      else if (ArrayBuffer.isView(data)) {
-        data = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength)
-      }
+    // Normalize Node `ws` Buffer / TypedArray to ArrayBuffer for browser-parity.
+    // Buffer is a Uint8Array subclass, so ArrayBuffer.isView covers it without
+    // referencing the global Buffer (eslint node/prefer-global/buffer).
+    if (typeof data !== 'string' && ArrayBuffer.isView(data)) {
+      data = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength)
     }
 
     if (typeof data !== 'string' || !isWithSign(data)) {
