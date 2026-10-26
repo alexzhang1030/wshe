@@ -2,7 +2,9 @@ import alias from 'vite-tsconfig-paths'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  plugins: [alias()],
+  plugins: [
+    alias(),
+  ],
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/__test__/setup.ts'],

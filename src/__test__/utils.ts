@@ -12,8 +12,13 @@ export function createMockWSServer() {
     ws.on('message', (data) => {
       try {
         const stringData = data.toString()
-        const parsedData = JSON.parse(isWithSign(stringData) ? omitSign(stringData) : stringData)
-        const message = { ...parsedData, timeSended: Date.now() }
+        const parsedData = JSON.parse(isWithSign(stringData)
+          ? omitSign(stringData)
+          : stringData)
+        const message = {
+          ...parsedData,
+          timeSended: Date.now(),
+        }
         ws.send(withSign(JSON.stringify(message)))
       }
       catch {

@@ -31,7 +31,9 @@ export function heartbeatStop(): void {
 
 /* c8 ignore start */
 export function isHeartbeatRequest(rawData: any, pingMessage = 'ping') {
-  const str = typeof rawData === 'string' ? rawData : rawData.toString()
+  const str = typeof rawData === 'string'
+    ? rawData
+    : rawData.toString()
   if (isWithSign(str)) {
     try {
       const data = destr<any>(omitSign(str))
