@@ -14,8 +14,12 @@ export function createWSHE<
   const resolvedConfig = resolveRawConfig(config)
 
   const emitter = mitt<DefaultEmittersType>()
-  let ws: WebSocket | null = typeof urlOrWsInstance === 'string' ? null : urlOrWsInstance
-  const url = typeof urlOrWsInstance === 'string' ? urlOrWsInstance : ''
+  let ws: WebSocket | null = typeof urlOrWsInstance === 'string'
+    ? null
+    : urlOrWsInstance
+  const url = typeof urlOrWsInstance === 'string'
+    ? urlOrWsInstance
+    : ''
 
   if (resolvedConfig.immediate) {
     if (!ws)

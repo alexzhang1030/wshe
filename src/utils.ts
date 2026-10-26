@@ -89,7 +89,9 @@ export function jsonParse<T>(data: string): T {
  * @returns [parsedData, isParsed]
  */
 export function tryToParseRawMessage<T>(rawData: any): [T | null, boolean] {
-  const str = typeof rawData === 'string' ? rawData : rawData.toString()
+  const str = typeof rawData === 'string'
+    ? rawData
+    : rawData.toString()
   if (!isWithSign(str))
     return [null, false]
   try {
